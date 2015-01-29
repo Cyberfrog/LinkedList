@@ -50,3 +50,15 @@ void test_getlastElement_in_list(){
 	d = (int *)get_last_element(l1);
 	assertEqual(*d, 20);	
 }
+
+void add1(void* data){
+	*(int*)data +=1;	
+}
+void test_add_1_to_each_element_of_list(){
+	int *d;
+	add_to_list(&l1,create_node(&data1));
+
+	traverse(l1,add1);
+	assertEqual(*((int*)l1.head->data),11);
+	assertEqual(*((int*)l1.tail->data),21);
+} 
