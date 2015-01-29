@@ -96,3 +96,36 @@ void test_indexOf_returns_minus_1_if_element_is_not_in_list(){
 	result = indexOf(l2,&data4 );
 	assertEqual(result,-1);
 }
+void test_delete_Element_At_given_index_and_reduces_count(){
+	int data2=12,data3=14,data4=16,*data;
+	add_to_list(&l2, create_node(&data1));
+	add_to_list(&l2, create_node(&data2));
+	add_to_list(&l2, create_node(&data3));
+	
+	data=deleteElementAt(&l2,1);
+	
+	assertEqual(l2.count,2);
+	assertEqual(*(int*)(l2.head->data),data1);
+	assertEqual(*(int*)(l2.tail->data),data3);
+
+}
+void test_delete_At_0th_resets_the_head_to_the_next_of_head(){
+	int data2=12,data3=14,data4=16,*data;
+	add_to_list(&l2, create_node(&data1));
+	add_to_list(&l2, create_node(&data2));
+	add_to_list(&l2, create_node(&data3));
+	
+	data=deleteElementAt(&l2,0);
+	
+	assertEqual(*(int*)(l2.head->data),data2);
+}
+void test_delete_last_element_resets_the_tail_to_the_next_of_head(){
+	int data2=12,data3=14,data4=16,*data;
+	add_to_list(&l2, create_node(&data1));
+	add_to_list(&l2, create_node(&data2));
+	add_to_list(&l2, create_node(&data3));
+	
+	data=deleteElementAt(&l2,2);
+	
+	assertEqual(*(int*)(l2.tail->data),data2);
+}
