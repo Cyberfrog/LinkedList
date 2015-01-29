@@ -19,3 +19,4 @@ void *get_first_element(LinkedList list);
 void *get_last_element(LinkedList list);
 void traverse(LinkedList, Oprate *);
 void * getElementAt(LinkedList, int );
+int indexOf(LinkedList, void *);

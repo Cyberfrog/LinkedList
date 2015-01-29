@@ -50,3 +50,15 @@ void * getElementAt(LinkedList list, int index){
 	}
 	return n->data;
 }
+int indexOf(LinkedList list, void* data){
+	int index=0;
+	Node* walker = list.head;  
+	while(walker!=NULL){
+		if(walker->data == data){
+			return index;
+		}
+		index++;
+		walker = walker->next;
+	}
+	return -1;
+}

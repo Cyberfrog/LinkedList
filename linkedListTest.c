@@ -7,7 +7,7 @@ LinkedList l1,l2;
 void setup(){
 	n1=(Node){&data,NULL};
 	l1=(LinkedList){&n1,&n1,1};
-	l2=(LinkedList){NULL,NULL,0};
+	l2=(LinkedList){NULL,NULL,0};	
 }
 void test_creatLinkList_has_head_tail_and_count_initialized_to_NULL(){
 	LinkedList list =createList();
@@ -79,3 +79,20 @@ void test_getElement_at_index_gets_refrence_to_data_at_given_index(){
 	result =getElementAt(l1, 1);
 	assertEqual(*result,data1);
 } 
+void test_indexOf_gets_index_of_given_data_in_list(){
+	int data2=12,data3=14,data4=16,result;
+	l2.head =&n1;
+	n1.next = create_node(&data2);
+	n1.next->next=create_node(&data3);
+	n1.next->next->next=create_node(&data4);
+	result = indexOf(l2, &data3);
+	assertEqual(result,2);
+}
+void test_indexOf_returns_minus_1_if_element_is_not_in_list(){
+	int data2=12,data3=14,data4=16,result;
+	l2.head =&n1;
+	n1.next = create_node(&data2);
+	n1.next->next=create_node(&data3);
+	result = indexOf(l2,&data4 );
+	assertEqual(result,-1);
+}
