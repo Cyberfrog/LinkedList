@@ -62,3 +62,20 @@ void test_add_1_to_each_element_of_list(){
 	assertEqual(*((int*)l1.head->data),11);
 	assertEqual(*((int*)l1.tail->data),21);
 } 
+
+void test_first_element_in_list_is_head(){
+	int * result = getElementAt(l1,0);
+	assertEqual(*(result),*((int*)l1.head->data));
+}
+void test_get_element_at_index_which_not_in_list_return_NULL(){
+	int *result;
+	result =getElementAt(l1, 1);
+	assert(result==NULL);
+} 
+void test_getElement_at_index_gets_refrence_to_data_at_given_index(){
+	int *result;
+	add_to_list(&l1,create_node(&data1));
+
+	result =getElementAt(l1, 1);
+	assertEqual(*result,data1);
+} 

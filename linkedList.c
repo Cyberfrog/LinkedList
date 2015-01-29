@@ -38,3 +38,15 @@ void traverse(LinkedList list, Oprate * oprate){
 		walker = walker->next;
 	}
 }
+
+void * getElementAt(LinkedList list, int index){
+	int i;
+	Node* n =list.head;
+	if(index>=list.count){
+		return NULL;
+	} 
+	for(i=0;i<index;i++){
+		n=n->next;
+	}
+	return n->data;
+}
