@@ -1,10 +1,12 @@
 #include "expr_assert.h"
 #include "linkedList.h"
 #include <stdio.h>
-int data =10,data1=20;
+int data,data1;
 Node n1 ; 
 LinkedList l1,l2;
 void setup(){
+	data=10;
+	data1=20;
 	n1=(Node){&data,NULL};
 	l1=(LinkedList){&n1,&n1,1};
 	l2=(LinkedList){NULL,NULL,0};	
@@ -128,4 +130,37 @@ void test_delete_last_element_resets_the_tail_to_the_next_of_head(){
 	data=deleteElementAt(&l2,2);
 	
 	assertEqual(*(int*)(l2.tail->data),data2);
+}
+void test_asArray_puts_all_data_refernce_in_gievn_array(){
+	int data2=12,data3=14,count,*data[5];
+	add_to_list(&l2, create_node(&data1));
+	add_to_list(&l2, create_node(&data2));
+	add_to_list(&l2, create_node(&data3));
+
+	count=asArray(l2,(void**)data);
+
+	assertEqual(count, 3);
+	assertEqual(*(data[0]),data1);
+	assertEqual(*(data[1]),data2);
+	assertEqual(*(data[2]),data3);
+}
+
+
+
+int isEven(void *data){
+	return *(int*)data%2==0;
+}
+
+void test_filter_gives_list_of_evens(){
+	int data2=12,data3=13,data4=15;
+	LinkedList *evens;
+	add_to_list(&l2, create_node(&data1));
+	add_to_list(&l2, create_node(&data2));
+	add_to_list(&l2, create_node(&data3));
+	add_to_list(&l2, create_node(&data4));
+	evens = filter(l2, isEven);
+
+	assert(evens->head->data==&data1);
+	assert(evens->tail->data==&data2);
+	assertEqual(evens->count,2);
 }

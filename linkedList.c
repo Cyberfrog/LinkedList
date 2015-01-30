@@ -67,26 +67,45 @@ void * deleteElementAt(LinkedList *list, int index){
 	int i;
 	void* data;
 	Node* n =list->head;
-	Node* prev=NULL;
+	Node* previousNode=NULL;
 	
 	if(index>=list->count||index<0){
 		return NULL;
 	} 
 
 	for(i=0;i<index;i++){
-		prev = n;
+		previousNode = n;
 		n=n->next;
 	}
-	
+
 	if(list->tail==n){
-		list->tail=prev;
+		list->tail=previousNode;
 	}
 
 	data= n->data;
-	prev?(prev->next =n->next):(list->head =list->head->next);
+	previousNode?(previousNode->next =n->next):(list->head =list->head->next);
 	
-
 	list->count--;
 	free(n);
 	return data;
+}
+
+int asArray(LinkedList list, void **destination){
+	int i;
+	for (i=0;i<list.count;i++){
+		destination[i]=getElementAt(list,i);
+	}
+	return i;
+}
+
+LinkedList * filter(LinkedList list, predicate * p){
+	LinkedList *filterd = (LinkedList*)calloc(sizeof(LinkedList),1);
+	Node* walker = list.head;
+	while(walker!=NULL){
+		if(p(walker->data)){
+			add_to_list(filterd,walker);
+		}
+		walker = walker->next;
+	}	
+	return filterd;
 }

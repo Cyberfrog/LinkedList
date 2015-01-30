@@ -1,6 +1,7 @@
 typedef struct linkedList LinkedList;
 typedef struct node Node;
 typedef void (Oprate)(void *data);
+typedef int (predicate)(void *data);
 struct linkedList{
 	Node* head;
 	Node* tail;
@@ -21,3 +22,5 @@ void traverse(LinkedList, Oprate *);
 void * getElementAt(LinkedList, int );
 int indexOf(LinkedList, void *);
 void * deleteElementAt(LinkedList *, int);
+int asArray(LinkedList, void **);
+LinkedList * filter(LinkedList, predicate *);
