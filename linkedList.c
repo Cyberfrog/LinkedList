@@ -66,7 +66,7 @@ int indexOf(LinkedList list, void* data){
 void * deleteElementAt(LinkedList *list, int index){
 	int i;
 	void* data;
-	Node* n =list->head;
+	Node* current =list->head;
 	Node* previousNode=NULL;
 	
 	if(index>=list->count||index<0){
@@ -74,19 +74,20 @@ void * deleteElementAt(LinkedList *list, int index){
 	} 
 
 	for(i=0;i<index;i++){
-		previousNode = n;
-		n=n->next;
+		previousNode = current;
+		current=current->next;
 	}
 
-	if(list->tail==n){
+	if(list->tail==current){
 		list->tail=previousNode;
+		(previousNode)&&(list->tail->next=NULL);
 	}
 
-	data= n->data;
-	previousNode?(previousNode->next =n->next):(list->head =list->head->next);
+	data= current->data;
+	previousNode?(previousNode->next =current->next):(list->head =list->head->next);
 	
 	list->count--;
-	free(n);
+	free(current);
 	return data;
 }
 

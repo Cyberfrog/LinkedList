@@ -111,6 +111,17 @@ void test_delete_Element_At_given_index_and_reduces_count(){
 	assertEqual(*(int*)(l2.tail->data),data3);
 
 }
+void test_deleting_last_element_head_and_tail_points_to_Null(){
+	int data2=12,*data;
+	add_to_list(&l2, create_node(&data1));
+	
+	data=deleteElementAt(&l2,0);
+	
+	assertEqual(l2.count,0);
+	assert(l2.head==NULL);
+	assert(l2.tail==NULL);
+}
+
 void test_delete_At_0th_resets_the_head_to_the_next_of_head(){
 	int data2=12,data3=14,data4=16,*data;
 	add_to_list(&l2, create_node(&data1));
